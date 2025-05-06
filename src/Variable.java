@@ -9,7 +9,7 @@ public class Variable {
     // Data members
     private String name;
     private List<String> outcomes;
-    private List<String> dependencies;
+    private List<String> parents;
     private List<Double> cpt;
 
     // Constructor
@@ -18,7 +18,7 @@ public class Variable {
         NodeList defChildren = def.getChildNodes();
         setName(varChildren);
         setOutcomes(varChildren);
-        setDependencies(defChildren);
+        setParents(defChildren);
         setCpt(defChildren);
     }
 
@@ -42,15 +42,15 @@ public class Variable {
         }
     }
 
-    public List<String> getDependencies() {
-        return dependencies;
+    public List<String> getParents() {
+        return parents;
     }
 
-    private void setDependencies(NodeList defChildren) {
-        this.dependencies = new ArrayList<>();
+    private void setParents(NodeList defChildren) {
+        this.parents = new ArrayList<>();
         for (int i = 0; i < defChildren.getLength(); i++) {
             if(defChildren.item(i).getNodeName().equals("GIVEN")) {
-                dependencies.add(defChildren.item(i).getNodeValue());
+                parents.add(defChildren.item(i).getNodeValue());
             }
         }
     }
